@@ -1,0 +1,72 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">Sistema Integrado</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">
+            Dashboard
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/products" routerLinkActive="active">
+            Productos
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/customers" routerLinkActive="active">
+            Clientes
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/combined" routerLinkActive="active">
+            Vista Combinada
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/stats" routerLinkActive="active">
+            Estadísticas
+          </a>
+        </li>
+      </ul>
+      <div class="navbar-text">
+        <small class="text-light">Angular 21+ | Laravel | CodeIgniter | Node.js</small>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>
+
+<footer class="bg-light text-center text-lg-start mt-5">
+  <div class="container p-4">
+    <div class="row">
+      <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+        <h5 class="text-uppercase">Sistema Integrado Web</h5>
+        <p>
+          Aplicación web desarrollada con múltiples tecnologías backend
+          y frontend moderno.
+        </p>
+      </div>
+      <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+        <h5 class="text-uppercase">Backend</h5>
+        <ul class="list-unstyled">
+          <li>Laravel (PHP 8+)</li>
+          <li>CodeIgniter 4 (PHP 8+)</li>
+          <li>Node.js/Express</li>
+        </ul>
+      </div>
+      <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+        <h5 class="text-uppercase">Frontend</h5>
+        <ul class="list-unstyled">
+          <li>Angular 21+</li>
+          <li>TypeScript</li>
+          <li>Bootstrap 5</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>

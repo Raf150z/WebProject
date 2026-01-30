@@ -1,0 +1,130 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Gestión de Productos</h1>
+    <button class="btn btn-primary" (click)="showForm = !showForm">
+      {{ showForm ? 'Cancelar' : 'Nuevo Producto' }}
+    </button>
+  </div>
+
+  <!-- Formulario -->
+  <div *ngIf="showForm" class="card mb-4">
+    <div class="card-header">
+      <h5 class="mb-0">{{ editingProduct ? 'Editar Producto' : 'Nuevo Producto' }}</h5>
+    </div>
+    <div class="card-body">
+      <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+      
+      <form (ngSubmit)="editingProduct ? updateProduct() : createProduct()">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="name" class="form-label">Nombre *</label>
+            <input type="text" class="form-control" id="name" 
+                   [(ngModel)]="newProduct.name" name="name" required>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="price" class="form-label">Precio *</label>
+            <input type="number" class="form-control" id="price" 
+                   [(ngModel)]="newProduct.price" name="price" step="0.01" min="0" required>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="stock" class="form-label">Stock *</label>
+            <input type="number" class="form-control" id="stock" 
+                   [(ngModel)]="newProduct.stock" name="stock" min="0" required>
+          </div>
+          <div class="col-md-12 mb-3">
+            <label for="description" class="form-label">Descripción</label>
+            <textarea class="form-control" id="description" rows="3"
+                      [(ngModel)]="newProduct.description" name="description"></textarea>
+          </div>
+        </div>
+        
+        <div class="d-flex gap-2">
+          <button type="submit" class="btn btn-success">
+            {{ editingProduct ? 'Actualizar' : 'Crear' }}
+          </button>
+          <button type="button" class="btn btn-secondary" (click)="resetForm()">
+            Cancelar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Lista de Productos -->
+  <div class="card">
+    <div class="card-header">
+      <h5 class="mb-0">Lista de Productos</h5>
+    </div>
+    <div class="card-body">
+      <div *ngIf="loading" class="text-center">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Cargando...</span>
+        </div>
+      </div>
+      
+      <div *ngIf="error && !loading" class="alert alert-danger">
+        {{ error }}
+        <button class="btn btn-sm btn-outline-danger ms-2" (click)="loadProducts()">
+          Reintentar
+        </button>
+      </div>
+      
+      <div *ngIf="!loading && !error">
+        <div *ngIf="products.length === 0" class="alert alert-info">
+          No hay productos registrados
+        </div>
+        
+        <div *ngIf="products.length > 0">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nombre</th>
+                  <th>Descripción</th>
+                  <th>Precio</th>
+                  <th>Stock</th>
+                  <th>Creado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let product of products">
+                  <td>{{ product.id }}</td>
+                  <td>{{ product.name }}</td>
+                  <td>{{ product.description | slice:0:50 }}...</td>
+                  <td>{{ product.price | currency }}</td>
+                  <td>
+                    <span class="badge" [ngClass]="{
+                      'bg-success': product.stock > 10,
+                      'bg-warning': product.stock > 0 && product.stock <= 10,
+                      'bg-danger': product.stock === 0
+                    }">
+                      {{ product.stock }}
+                    </span>
+                  </td>
+                  <td>{{ product.created_at | date:'short' }}</td>
+                  <td>
+                    <div class="btn-group btn-group-sm">
+                      <button class="btn btn-outline-primary" 
+                              (click)="editProduct(product)">
+                        Editar
+                      </button>
+                      <button class="btn btn-outline-danger" 
+                              (click)="deleteProduct(product.id)">
+                        Eliminar
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

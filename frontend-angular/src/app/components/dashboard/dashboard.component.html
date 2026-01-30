@@ -1,0 +1,122 @@
+<div class="container mt-4">
+  <h1 class="mb-4">Dashboard del Sistema</h1>
+  
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h5 class="mb-0">Estadísticas del Sistema</h5>
+          <button class="btn btn-primary btn-sm" (click)="refresh()" [disabled]="loading">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+            Actualizar
+          </button>
+        </div>
+        <div class="card-body">
+          <div *ngIf="loading" class="text-center">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Cargando...</span>
+            </div>
+          </div>
+          
+          <div *ngIf="error" class="alert alert-danger">
+            {{ error }}
+          </div>
+          
+          <div *ngIf="stats && !loading" class="row">
+            <div class="col-md-3 mb-3">
+              <div class="card text-white bg-primary">
+                <div class="card-body">
+                  <h5 class="card-title">Productos</h5>
+                  <h2 class="card-text">{{ stats.total_products }}</h2>
+
+                  <p class="card-text">Total registrados</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-3 mb-3">
+              <div class="card text-white bg-success">
+                <div class="card-body">
+                  <h5 class="card-title">Clientes</h5>
+                  <h2 class="card-text">{{ stats.total_customers }}
+</h2>
+                  <p class="card-text">Total registrados</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-3 mb-3">
+              <div class="card text-white bg-warning">
+                <div class="card-body">
+                  <h5 class="card-title">Valor Inventario</h5>
+                  <h2 class="card-text">{{ stats.total_inventory_value | currency }}</h2>
+                  <p class="card-text">Valor total</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-3 mb-3">
+              <div class="card text-white bg-info">
+                <div class="card-body">
+                  <h5 class="card-title">Precio Promedio</h5>
+                  <h2 class="card-text">{{ stats.avg_price | currency }}</h2>
+                  <p class="card-text">Por producto</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">Acciones Rápidas</h5>
+        </div>
+        <div class="card-body">
+          <div class="d-grid gap-2">
+            <a routerLink="/products" class="btn btn-outline-primary">
+              Gestionar Productos
+            </a>
+            <a routerLink="/customers" class="btn btn-outline-success">
+              Gestionar Clientes
+            </a>
+            <a routerLink="/combined" class="btn btn-outline-info">
+              Vista Combinada
+            </a>
+            <a routerLink="/stats" class="btn btn-outline-warning">
+              Ver Estadísticas
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">Servicios Activos</h5>
+        </div>
+        <div class="card-body">
+          <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Laravel API (Productos)
+              <span class="badge bg-success rounded-pill">Activo</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              CodeIgniter API (Clientes)
+              <span class="badge bg-success rounded-pill">Activo</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Node.js Gateway
+              <span class="badge bg-success rounded-pill">Activo</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

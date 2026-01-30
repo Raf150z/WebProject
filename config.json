@@ -1,0 +1,40 @@
+{
+  "services": {
+    "laravel": {
+      "url": "http://localhost:8000",
+      "endpoints": {
+        "products": "/api/products",
+        "health": "/api/health"
+      }
+    },
+    "codeigniter": {
+      "url": "http://localhost:8001",
+      "endpoints": {
+        "customers": "/api/customers",
+        "health": "/api/health"
+      }
+    },
+    "node_gateway": {
+      "url": "http://localhost:3000",
+      "endpoints": {
+        "combined": "/api/combined-data",
+        "stats": "/api/stats"
+      }
+    },
+    "angular": {
+      "url": "http://localhost:4200"
+    }
+  },
+  "database": {
+    "mysql": {
+      "host": "localhost",
+      "port": 3306,
+      "database": "laravel_db"
+    },
+    "sqlserver": {
+      "host": "localhost",
+      "port": 3306,
+      "database": "codeigniter_db"
+    }
+  }
+}
