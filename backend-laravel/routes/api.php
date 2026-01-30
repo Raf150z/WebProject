@@ -21,4 +21,13 @@ Route::put('/products/{id}', [ProductController::class, 'update']);
 Route::delete('/products/{id}', [ProductController::class, 'destroy']);
 
 // O también puedes usar apiResource si prefieres:
+
 // Route::apiResource('products', ProductController::class);
+
+Route::get('/', function () {
+    return response()->json([
+        'service' => 'Laravel API',
+        'status' => 'ok',
+        'timestamp' => now()
+    ]);
+});
